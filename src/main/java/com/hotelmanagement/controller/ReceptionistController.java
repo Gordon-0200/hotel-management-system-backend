@@ -53,6 +53,26 @@ public class ReceptionistController {
         }
     }
 
+    @GetMapping("/all")
+    public List<Receptionist> getAll() {
+        return receptionistService.getAll();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getById(@PathVariable UUID id) {
+        Optional<Receptionist> receptionist = receptionistService.getById(id);
+        if (receptionist.isPresent()) {
+            return new ResponseEntity<>(receptionist.get(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(ReceptionistService.NOT_FOUND, HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/by-skill")
+    public List<Receptionist> bySkill(@RequestParam String name) {
+        return receptionistService.getBySkill(name);
+    }
+
     // D3
     @PutMapping("/{receptionistId}/skills/{skillId}")
     public ResponseEntity<String> addSkill(@PathVariable UUID receptionistId, @PathVariable UUID skillId) {

@@ -35,7 +35,7 @@ public List<FrontDesk> getAll(){
 
 //C2
 @GetMapping ("/free")
-public List<FrontDesk> getFree() {
+public List<FrontDesk> free() {
         return frontDeskService.getFree();
     }
     @GetMapping("/{id}")
