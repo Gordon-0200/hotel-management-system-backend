@@ -14,5 +14,8 @@ public interface FrontDeskRepository extends JpaRepository<FrontDesk, UUID> {
     @Query("SELECT f FROM FrontDesk f WHERE NOT EXISTS (SELECT r FROM Receptionist r WHERE r.frontDesk = f) ORDER BY f.deskNumber ASC")
     List<FrontDesk> findFree();
 
+    @Query("SELECT f FROM FrontDesk f WHERE NOT EXISTS (SELECT r FROM Receptionist r WHERE r.frontDesk = f) ORDER BY f.deskNumber")
+    List<FrontDesk> findFreeFrontDesks();
+
     Optional<FrontDesk> findByDeskNumber(int deskNumber);
 }
